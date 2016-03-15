@@ -3,7 +3,7 @@
 import java.awt.*;
 import java.awt.event.*;
 
-public class Test
+public class Main
 {
 
    private Frame mainFrame;
@@ -14,14 +14,14 @@ public class Test
    private TextField c, i, g, x, m;
    private Label cLabel, iLabel, gLabel, xLabel, mLabel;
 
-   public Test()
+   public Main()
    {
       prepareGUI();
    }
 
    public static void main(String[] args)
    {
-      Test awtEcon = new Test();
+      Main awtEcon = new Main();
       awtEcon.showButtons();
    }
 
