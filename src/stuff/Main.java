@@ -1,7 +1,9 @@
-//package stuff;
+package stuff;
 
 import java.awt.*;
 import java.awt.event.*;
+
+import com.sun.org.apache.xalan.internal.utils.Objects;
 
 public class Main
 {
@@ -11,8 +13,9 @@ public class Main
    private Label statusLabel;
    private Panel controlPanel;
    private Panel GDPInputPanel;
-   private TextField c, i, g, x, m;
+   private static TextField cInput, iInput, gInput, xInput, mInput;
    private Label cLabel, iLabel, gLabel, xLabel, mLabel;
+   private static double c, i, g, x, m, gdp;
 
    public Main()
    {
@@ -23,6 +26,7 @@ public class Main
    {
       Main awtEcon = new Main();
       awtEcon.showButtons();
+      
    }
 
    private void prepareGUI()
@@ -40,8 +44,9 @@ public class Main
       headerLabel = new Label();
       headerLabel.setAlignment(Label.CENTER);
       statusLabel = new Label();
-      statusLabel.setAlignment(Label.CENTER);
-      statusLabel.setSize(350,100);
+      statusLabel.setAlignment(Label.LEFT);
+      statusLabel.setSize(325,150);
+      statusLabel.setText("GDP (In billions of USD):                     ");
 
       controlPanel = new Panel();
       controlPanel.setLayout(new FlowLayout());
@@ -50,8 +55,8 @@ public class Main
 
       mainFrame.add(headerLabel);
       mainFrame.add(controlPanel);
-      mainFrame.add(statusLabel);
       mainFrame.add(GDPInputPanel);
+      mainFrame.add(statusLabel);
       mainFrame.setVisible(true);
 
       cLabel = new Label("C:", Label.LEFT);
@@ -59,23 +64,26 @@ public class Main
       gLabel = new Label("G:", Label.LEFT);
       xLabel = new Label("X:", Label.LEFT);
       mLabel = new Label("M:", Label.LEFT);
+      
 
-      c = new TextField("", 5);
-      i = new TextField("", 5);
-      g = new TextField("", 5);
-      x = new TextField("", 5);
-      m = new TextField("", 5);
+      cInput = new TextField("", 5);
+      iInput = new TextField("", 5);
+      gInput = new TextField("", 5);
+      xInput = new TextField("", 5);
+      mInput = new TextField("", 5);
 
       GDPInputPanel.add(cLabel);
-      GDPInputPanel.add(c);
+      GDPInputPanel.add(cInput);
       GDPInputPanel.add(iLabel);
-      GDPInputPanel.add(i);
+      GDPInputPanel.add(iInput);
       GDPInputPanel.add(gLabel);
-      GDPInputPanel.add(g);
+      GDPInputPanel.add(gInput);
       GDPInputPanel.add(xLabel);
-      GDPInputPanel.add(x);
+      GDPInputPanel.add(xInput);
       GDPInputPanel.add(mLabel);
-      GDPInputPanel.add(m);
+      GDPInputPanel.add(mInput);
+      
+      
 
    }
 
@@ -103,27 +111,52 @@ public class Main
    }
 
    private class ButtonClickListener implements ActionListener{
-      public void actionPerformed(ActionEvent e)
-      {
-         String command = e.getActionCommand();
-         if( command.equals( "Calculate" ))
-         {
-            //add up GDP stuff and show it
-         }
-         else if( command.equals( "Submit" ) )
-         {
-            statusLabel.setText("Submit Button clicked.");
-         }
-         else if( command.equals("Exit"))
-         {
-            System.exit(0);
-         }
-         else
-         {
-            System.out.println("Unexpected button action!");
-            System.exit(0);
-         }
+	   public void actionPerformed(ActionEvent e)
+	   {
+		   String command = e.getActionCommand();
+		   if( command.equals("Calculate"))
+           {
+        	   //add up GDP stuff and show it
+			   if(!Objects.equals(cInput.getText(),""))
+			   {
+				   c = Double.parseDouble(cInput.getText());
+			   }
+			   if(!Objects.equals(iInput.getText(),""))
+			   {
+				   i = Double.parseDouble(iInput.getText());
+			   }
+			   if(!Objects.equals(gInput.getText(),""))
+			   {
+				   g = Double.parseDouble(gInput.getText());
+			   }
+			   if(!Objects.equals(xInput.getText(),""))
+			   {
+				   x = Double.parseDouble(xInput.getText());
+			   }
+			   if(!Objects.equals(mInput.getText(),""))
+			   {
+				   m = Double.parseDouble(mInput.getText());
+			   }
+			   gdp = c + i + g + x - m;
+			   System.out.println(gdp);
+			   statusLabel.setText("GDP (in billions of USD): " + gdp);
+			   //statusLabel.setText("GDP: 3");
+        	 
+           }
+           else if( command.equals("Submit"))
+           {
+        	   statusLabel.setText("Submit Button clicked.");
+           }
+           else if( command.equals("Exit"))
+           {
+               System.exit(0);
+           }
+           else
+           {
+              System.out.println("Unexpected button action!");
+              System.exit(0);
+           }
 
-      }
+	   }
    }
 }
