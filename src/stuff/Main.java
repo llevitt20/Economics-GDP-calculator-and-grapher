@@ -3,7 +3,7 @@
 import java.awt.*;
 import java.awt.event.*;
 
-public class Test
+public class Main
 {
 
    private Frame mainFrame;
