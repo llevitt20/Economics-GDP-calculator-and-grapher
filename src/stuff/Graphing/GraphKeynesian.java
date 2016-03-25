@@ -24,7 +24,8 @@ import javax.swing.SwingUtilities;
  *
  * @author Rodrigo
  */
-public class GraphKeynesian extends JPanel {
+public class GraphKeynesian extends JPanel 
+{
 
     private int width = 800;
     private int heigth = 400;
@@ -38,12 +39,14 @@ public class GraphKeynesian extends JPanel {
     private int numberYDivisions = 10;
     private List<Double> scores;
 
-    public GraphKeynesian(List<Double> scores) {
+    public GraphKeynesian(List<Double> scores) 
+    {
         this.scores = scores;
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) 
+    {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -53,12 +56,14 @@ public class GraphKeynesian extends JPanel {
 
         List<Point> graphPoints = new ArrayList<>();
         //Dertermines X and Y and adds padding for the graph
-        for (int i = 0; i < scores.size(); i++) {
+        for (int i = 0; i < scores.size(); i++) 
+        {
             //Determine X value
             int x1 = (int) (i * xScale + padding + labelPadding);
             //Determines Y value frome scores
             int y1 = (int) ((getMaxScore() - scores.get(i)) * yScale + padding);
-            if (scores.size() - 1 == i){
+            if (scores.size() - 1 == i)
+            {
               //Determine X value
               x1 = (int) ((i - 1) * xScale + padding + labelPadding);
               //Determines Y value frome scores
@@ -94,13 +99,15 @@ public class GraphKeynesian extends JPanel {
         }
 
         // and for x axis
-        for (int i = 0; i < scores.size(); i++) {
+        for (int i = 0; i < scores.size(); i++) 
+        {
             if (scores.size() > 1) {
                 int x0 = i * (getWidth() - padding * 2 - labelPadding) / (scores.size() - 1) + padding + labelPadding;
                 int x1 = x0;
                 int y0 = getHeight() - padding - labelPadding;
                 int y1 = y0 - pointWidth;
-                if ((i % ((int) ((scores.size() / 20.0)) + 1)) == 0) {
+                if ((i % ((int) ((scores.size() / 20.0)) + 1)) == 0) 
+                {
                     g2.setColor(gridColor);
                     g2.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
                     g2.setColor(Color.BLACK);
@@ -120,7 +127,8 @@ public class GraphKeynesian extends JPanel {
         Stroke oldStroke = g2.getStroke();
         g2.setColor(lineColor);
         g2.setStroke(GRAPH_STROKE);
-        for (int i = 0; i < graphPoints.size() - 1; i++) {
+        for (int i = 0; i < graphPoints.size() - 1; i++) 
+        {
             int x1 = graphPoints.get(i).x;
             int y1 = graphPoints.get(i).y;
             int x2 = graphPoints.get(i + 1).x;
@@ -130,7 +138,8 @@ public class GraphKeynesian extends JPanel {
 
         g2.setStroke(oldStroke);
         g2.setColor(pointColor);
-        for (int i = 0; i < graphPoints.size(); i++) {
+        for (int i = 0; i < graphPoints.size(); i++) 
+        {
             int x = graphPoints.get(i).x - pointWidth / 2;
             int y = graphPoints.get(i).y - pointWidth / 2;
             int ovalW = pointWidth;
@@ -144,33 +153,40 @@ public class GraphKeynesian extends JPanel {
 //        return new Dimension(width, heigth);
 //    }
 
-    private double getMinScore() {
+    private double getMinScore() 
+    {
         double minScore = Double.MAX_VALUE;
-        for (Double score : scores) {
+        for (Double score : scores) 
+        {
             minScore = Math.min(minScore, score);
         }
         return minScore;
     }
 
-    private double getMaxScore() {
+    private double getMaxScore() 
+    {
         double maxScore = Double.MIN_VALUE;
-        for (Double score : scores) {
+        for (Double score : scores) 
+        {
             maxScore = Math.max(maxScore, score);
         }
         return maxScore;
     }
 
-    public void setScores(List<Double> scores) {
+    public void setScores(List<Double> scores) 
+    {
         this.scores = scores;
         invalidate();
         this.repaint();
     }
 
-    public List<Double> getScores() {
+    public List<Double> getScores() 
+    {
         return scores;
     }
 
-    private static void createAndShowGui() {
+    private static void createAndShowGui() 
+    {
         List<Double> scores = new ArrayList<>();
         Random random = new Random();
         int maxDataPoints = 40;
@@ -196,9 +212,12 @@ public class GraphKeynesian extends JPanel {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-      SwingUtilities.invokeLater(new Runnable() {
-         public void run() {
+    public static void main(String[] args) 
+    {
+      SwingUtilities.invokeLater(new Runnable() 
+      {
+         public void run() 
+         {
             createAndShowGui();
          }
       });
