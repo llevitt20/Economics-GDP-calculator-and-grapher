@@ -110,8 +110,7 @@ public class Main
       mainFrame.setVisible(true);
    }
 
-   private class ButtonClickListener implements ActionListener
-   {
+   private class ButtonClickListener implements ActionListener{
 	   public void actionPerformed(ActionEvent e)
 	   {
 		   String command = e.getActionCommand();

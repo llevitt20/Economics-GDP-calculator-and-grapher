@@ -70,7 +70,9 @@ public class GraphKeynesian extends JPanel
               y1 = (int) ((getMaxScore() - scores.get(i)) * yScale + padding);
 
               graphPoints.add(new Point(x1, y1));
-            } else{
+            }
+            else
+            {
               graphPoints.add(new Point(x1, y1));
             }
         }
@@ -86,7 +88,8 @@ public class GraphKeynesian extends JPanel
             int x1 = pointWidth + padding + labelPadding;
             int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
             int y1 = y0;
-            if (scores.size() > 0) {
+            if (scores.size() > 0) 
+            {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
