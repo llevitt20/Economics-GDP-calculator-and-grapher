@@ -1,10 +1,8 @@
-package stuff;
+package econPkg;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.BoxLayout;
-
-//import com.sun.org.apache.xalan.internal.utils.Objects;
 
 public class GDP
 {
@@ -136,77 +134,89 @@ public class GDP
 	   public void actionPerformed(ActionEvent e)
 	   {
 		   String command = e.getActionCommand();
-		   if( command.equals("Calculate"))
-       {
-          	   //add up GDP stuff and show it
-  			   if(!Objects.equals(cInput.getText(),""))
-  			   {
-  				   c = Double.parseDouble(cInput.getText());
-  			   }
-  			   if(!Objects.equals(iInput.getText(),""))
-  			   {
-  				   i = Double.parseDouble(iInput.getText());
-  			   }
-  			   if(!Objects.equals(gInput.getText(),""))
-  			   {
-  				   g = Double.parseDouble(gInput.getText());
-  			   }
-  			   if(!Objects.equals(xInput.getText(),""))
-  			   {
-  				   x = Double.parseDouble(xInput.getText());
-  			   }
-  			   if(!Objects.equals(mInput.getText(),""))
-  			   {
-  				   m = Double.parseDouble(mInput.getText());
-  			   }
-  			   gdp = c + i + g + x - m;
-  			   System.out.println(gdp);
-  			   statusLabel.setText("GDP (in billions of USD): " + gdp);
-  			   //statusLabel.setText("GDP: 3");
-         }
-         else if( command.equals("Clear"))
-         {
-      	   statusLabel.setText("GDP (In billions of USD):                     ");
-         }
-         else if( command.equals("Exit"))
-         {
-             System.exit(0);
-         }
-         else if( command.equals("showCanada"))
-         {
-        	 statusLabel.setText("GDP (in billions of USD): 1827");
-           cInput.setText("1023");
-           iInput.setText("365");
-           gInput.setText("457");
-           xInput.setText("566");
-           mInput.setText("603");
-         }
-         else if( command.equals("showUSA"))
-         {
-           //Numbers aren't real
-        	 statusLabel.setText("GDP (in billions of USD): 1677");
-           cInput.setText("100");
-           iInput.setText("100");
-           gInput.setText("100");
-           xInput.setText("100");
-           mInput.setText("100");
-         }
-         else if( command.equals("showMexico"))
-         {
-           //Only X and M are real
-        	 statusLabel.setText("GDP (in billions of USD): 1261");
-           cInput.setText("100");
-           iInput.setText("100");
-           gInput.setText("100");
-           xInput.setText("381");
-           mInput.setText("395");
-         }
-         else
-         {
-            System.out.println("Unexpected button action!");
-            System.exit(0);
-         }
+           if( command.equals("Calculate"))
+           {
 
+               //add up GDP stuff and show it
+    		   if(!cInput.getText().equals(""))
+    		   {
+    			   c = Double.parseDouble(cInput.getText());
+    		   }
+    		   if(!iInput.getText().equals(""))
+    		   {
+    			   i = Double.parseDouble(iInput.getText());
+    		   }
+    		   if(!gInput.getText().equals(""))
+    		   {
+    			   g = Double.parseDouble(gInput.getText());
+    		   }
+    		   if(!xInput.getText().equals(""))
+    		   {
+    			   x = Double.parseDouble(xInput.getText());
+    		   }
+    		   if(!mInput.getText().equals(""))
+    		   {
+    			   m = Double.parseDouble(mInput.getText());
+    		   }
+    		   gdp = c + i + g + x - m;
+    		   System.out.println(gdp);
+    		   statusLabel.setText("GDP (in billions of USD): " + gdp);
+
+                String[] args = {"", ""};
+                CreateGraph graph = new CreateGraph();
+                graph.x1 = (gdp/2000) * 800 - 200;
+                System.out.println(graph.x1);
+                graph.main(args);
+
+             }
+             else if( command.equals("Clear"))
+             {
+          	      statusLabel.setText("GDP (In billions of USD):                     ");
+                  cInput.setText("");
+                  iInput.setText("");
+                  gInput.setText("");
+                  xInput.setText("");
+                  mInput.setText("");
+             }
+             else if( command.equals("Exit"))
+             {
+                    System.exit(0);
+             }
+             else if( command.equals("showCanada"))
+             {
+                 statusLabel.setText("GDP (in billions of USD): 1808");
+                 cInput.setText("1023");
+                 iInput.setText("365");
+                 gInput.setText("457");
+                 xInput.setText("566");
+                 mInput.setText("603");
+             }
+
+             else if( command.equals("showUSA"))
+             {
+                 //Numbers aren't real
+                 statusLabel.setText("GDP (in billions of USD): 1677");
+                 cInput.setText("100");
+                 iInput.setText("100");
+                 gInput.setText("100");
+                 xInput.setText("100");
+                 mInput.setText("100");
+             }
+             else if( command.equals("showMexico"))
+             {
+                 //Only X and M are real
+                 statusLabel.setText("GDP (in billions of USD): 1261");
+                 cInput.setText("100");
+                 iInput.setText("100");
+                 gInput.setText("100");
+                 xInput.setText("381");
+                 mInput.setText("395");
+             }
+             else
+             {
+                 System.out.println("Unexpected button action!");
+                 System.exit(0);
+             }
 	   }
    }
 }

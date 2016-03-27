@@ -1,4 +1,4 @@
-package stuff.Graphing;
+package econPkg;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class GraphPanel extends JPanel
+public class GraphPanelReference extends JPanel
 {
 
     private int width = 800;
@@ -31,7 +31,7 @@ public class GraphPanel extends JPanel
     private int numberYDivisions = 10;
     private List<Double> scores;
 
-    public GraphPanel(List<Double> scores)
+    public GraphPanelReference(List<Double> scores)
     {
         this.scores = scores;
     }
@@ -179,7 +179,7 @@ public class GraphPanel extends JPanel
             // scores.add((double) random.nextDouble() * maxScore);
            scores.add((double) i + 1);
         }
-        GraphPanel mainPanel = new GraphPanel(scores);
+        GraphPanelReference mainPanel = new GraphPanelReference(scores);
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("DrawGraph");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

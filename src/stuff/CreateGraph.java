@@ -1,4 +1,4 @@
-package stuff.Graphing;
+package econPkg;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -20,13 +20,11 @@ import javax.swing.SwingUtilities;
 
 public class CreateGraph extends JPanel
 {
-	private int width = 450;
-	private int height = 450;
 	private Color ADColor = new Color(255,0,0);
 	private Color LRASColor = new Color(0,0,255);
 	private static final Stroke GRAPH_STROKE = new BasicStroke(2f, 1, 1);
-	int x1;
-	int y1;
+	public static double x1;
+	public static double y1;
 
 	@Override
 	protected void paintComponent(Graphics g)
@@ -39,8 +37,9 @@ public class CreateGraph extends JPanel
 		 /* GRAPH AD */
 		 g2.setColor(ADColor);
 
-		 x1 = 350;
-		 y1 = 150;
+		 y1 = (int) 150.0 - (x1/2000)* 200;
+		 x1 = (int) x1;
+
 		 g2.draw(new Line2D.Double(x1, y1, x1 + 400, y1 + 400));
 
 		 /* GRAPH LRAS */
@@ -56,7 +55,7 @@ public class CreateGraph extends JPanel
         CreateGraph mainPanel = new CreateGraph();
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("Generated Graph");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(mainPanel);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -73,4 +72,5 @@ public class CreateGraph extends JPanel
          }
       });
    }
+
 }
