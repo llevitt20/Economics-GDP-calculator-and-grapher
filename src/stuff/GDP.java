@@ -2,6 +2,7 @@ package stuff;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.BoxLayout;
 
 //import com.sun.org.apache.xalan.internal.utils.Objects;
 
@@ -27,13 +28,12 @@ public class GDP
    {
       GDP awtEcon = new GDP();
       awtEcon.showButtons();
-      awtEcon.templateButtons();
    }
 
    private void prepareGUI()
    {
       mainFrame = new Frame("Economics");
-      mainFrame.setSize(550, 150);
+      mainFrame.setSize(560, 200);
       mainFrame.setLayout(new FlowLayout());
       mainFrame.addWindowListener(new WindowAdapter()
       {
@@ -47,15 +47,18 @@ public class GDP
       statusLabel = new Label();
       statusLabel.setAlignment(Label.LEFT);
       statusLabel.setSize(325,150);
+  //    statusLabel.setFont
       statusLabel.setText("GDP (In billions of USD):                     ");
 
       controlPanel = new Panel();
       controlPanel.setLayout(new FlowLayout());
       GDPInputPanel = new Panel();
       GDPInputPanel.setLayout(new FlowLayout());
-      templatePanel = new Panel();
-      templatePanel.setLayout(new FlowLayout()); //Make this a better verticle layout
 
+      templatePanel = new Panel();
+      templatePanel.setLayout(new BoxLayout(templatePanel, BoxLayout.Y_AXIS)); //Make this a better verticle layout
+
+      mainFrame.add(templatePanel);
       mainFrame.add(headerLabel);
       mainFrame.add(controlPanel);
       mainFrame.add(GDPInputPanel);
@@ -91,47 +94,23 @@ public class GDP
 
    private void showButtons()
    {
-      headerLabel.setText("GDP: C+I+G+(X-M)!");
+      headerLabel.setText("Calculate your GDP: C+I+G+(X-M)");
 
       Button okButton = new Button("Calculate!");
-      Button submitButton = new Button("Submit");
+      Button clearButton = new Button("Clear");
       Button cancelButton = new Button("Exit");
 
       okButton.setActionCommand("Calculate");
-      submitButton.setActionCommand("Submit");
+      clearButton.setActionCommand("Clear");
       cancelButton.setActionCommand("Exit");
 
       okButton.addActionListener(new ButtonClickListener());
-      submitButton.addActionListener(new ButtonClickListener());
+      clearButton.addActionListener(new ButtonClickListener());
       cancelButton.addActionListener(new ButtonClickListener());
-      
-      Button canadaButton = new Button("Canada");
-      Button usaButton = new Button("USA");
-      Button mexicoButton = new Button("Mexico");
-
-      canadaButton.setActionCommand("showCanada");
-      usaButton.setActionCommand("showUSA");
-      mexicoButton.setActionCommand("showMexico");
-
-      canadaButton.addActionListener(new ButtonClickListener());
-      usaButton.addActionListener(new ButtonClickListener());
-      mexicoButton.addActionListener(new ButtonClickListener());
-
-      controlPanel.add(canadaButton);
-      controlPanel.add(usaButton);
-      controlPanel.add(mexicoButton);
-
 
       controlPanel.add(okButton);
-      controlPanel.add(submitButton);
+      controlPanel.add(clearButton);
       controlPanel.add(cancelButton);
-
-      mainFrame.setVisible(true);
-   }
-
-   private void templateButtons()
-   {
-      headerLabel.setText("GDP: C+I+G+(X-M)!");
 
       Button canadaButton = new Button("Canada");
       Button usaButton = new Button("USA");
@@ -159,35 +138,35 @@ public class GDP
 		   String command = e.getActionCommand();
 		   if( command.equals("Calculate"))
        {
-          // 	   //add up GDP stuff and show it
-  			  //  if(!Objects.equals(cInput.getText(),""))
-  			  //  {
-  				//    c = Double.parseDouble(cInput.getText());
-  			  //  }
-  			  //  if(!Objects.equals(iInput.getText(),""))
-  			  //  {
-  				//    i = Double.parseDouble(iInput.getText());
-  			  //  }
-  			  //  if(!Objects.equals(gInput.getText(),""))
-  			  //  {
-  				//    g = Double.parseDouble(gInput.getText());
-  			  //  }
-  			  //  if(!Objects.equals(xInput.getText(),""))
-  			  //  {
-  				//    x = Double.parseDouble(xInput.getText());
-  			  //  }
-  			  //  if(!Objects.equals(mInput.getText(),""))
-  			  //  {
-  				//    m = Double.parseDouble(mInput.getText());
-  			  //  }
-  			  //  gdp = c + i + g + x - m;
-  			  //  System.out.println(gdp);
-  			  //  statusLabel.setText("GDP (in billions of USD): " + gdp);
-  			  //  //statusLabel.setText("GDP: 3");
+          	   //add up GDP stuff and show it
+  			   if(!Objects.equals(cInput.getText(),""))
+  			   {
+  				   c = Double.parseDouble(cInput.getText());
+  			   }
+  			   if(!Objects.equals(iInput.getText(),""))
+  			   {
+  				   i = Double.parseDouble(iInput.getText());
+  			   }
+  			   if(!Objects.equals(gInput.getText(),""))
+  			   {
+  				   g = Double.parseDouble(gInput.getText());
+  			   }
+  			   if(!Objects.equals(xInput.getText(),""))
+  			   {
+  				   x = Double.parseDouble(xInput.getText());
+  			   }
+  			   if(!Objects.equals(mInput.getText(),""))
+  			   {
+  				   m = Double.parseDouble(mInput.getText());
+  			   }
+  			   gdp = c + i + g + x - m;
+  			   System.out.println(gdp);
+  			   statusLabel.setText("GDP (in billions of USD): " + gdp);
+  			   //statusLabel.setText("GDP: 3");
          }
-         else if( command.equals("Submit"))
+         else if( command.equals("Clear"))
          {
-      	   statusLabel.setText("Submit Button clicked.");
+      	   statusLabel.setText("GDP (In billions of USD):                     ");
          }
          else if( command.equals("Exit"))
          {
@@ -196,16 +175,31 @@ public class GDP
          else if( command.equals("showCanada"))
          {
         	 statusLabel.setText("GDP (in billions of USD): 1827");
-           
-
+           cInput.setText("1023");
+           iInput.setText("365");
+           gInput.setText("457");
+           xInput.setText("566");
+           mInput.setText("603");
          }
          else if( command.equals("showUSA"))
          {
+           //Numbers aren't real
         	 statusLabel.setText("GDP (in billions of USD): 1677");
+           cInput.setText("100");
+           iInput.setText("100");
+           gInput.setText("100");
+           xInput.setText("100");
+           mInput.setText("100");
          }
          else if( command.equals("showMexico"))
          {
+           //Only X and M are real
         	 statusLabel.setText("GDP (in billions of USD): 1261");
+           cInput.setText("100");
+           iInput.setText("100");
+           gInput.setText("100");
+           xInput.setText("381");
+           mInput.setText("395");
          }
          else
          {
